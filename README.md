@@ -1,1 +1,1 @@
-# connect-four-cli
+# Connect Four CLI

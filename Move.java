@@ -7,6 +7,7 @@ public class Move {
     this.column = column;
   }
 
+  @Override
   public String toString() {
     return "(row: " + row + " column: " + column + ")";
   }

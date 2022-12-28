@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class ConnectFourClient {
   public static ConnectFourGrid grid;
-  public static void main(String[] args) throws InterruptedException {
-    introductionMessage();
+  public static void main(String[] args) {
+    introduction();
 
     grid = new ConnectFourGrid();
     Scanner console = new Scanner(System.in);
@@ -30,9 +30,12 @@ public class ConnectFourClient {
           inputInvalid = true;
         } else {
           // 1 <= column <= ConnectFourGrid.COLUMNS
-          grid.applyMoveByColumn(column, ConnectFourGrid.PLAYER_DISC);
-          checkGameOver();
-          ConnectFourBot.applyMove(grid);
+          if (grid.applyMoveByColumn(column, ConnectFourGrid.PLAYER_DISC)) {
+            checkGameOver();
+            ConnectFourBot.applyMove(grid);
+          } else {
+            inputInvalid = true;
+          }
         }
       } else {
         if (console.next().toLowerCase().equals("exit")) {
@@ -59,7 +62,7 @@ public class ConnectFourClient {
   /**
    * Introductory message containing details on how the game is to be played.
    */
-  public static void introductionMessage() {
+  public static void introduction() {
     System.out.println("  _____                            _        ______");
     System.out.println(" / ____|                          | |      |  ____|");
     System.out.println("| |     ___  _ __  _ __   ___  ___| |_ ____| |__ ___  _   _ _ __");

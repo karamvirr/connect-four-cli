@@ -59,13 +59,13 @@ public class ConnectFourBot {
    */
   public static int alphabeta(ConnectFourGrid grid, int depth, int alpha, int beta, boolean maximizingPlayer) {
     if (grid.isWinner(ConnectFourGrid.COMPUTER_DISC)) {
-      return MAX_REWARD;
+      return MAX_REWARD - (SEARCH_DEPTH - depth);
     } else if (grid.isWinner(ConnectFourGrid.PLAYER_DISC)) {
-      return -MAX_REWARD;
+      return -MAX_REWARD - (SEARCH_DEPTH - depth);
     } else if (grid.isTiedGame()) {
       return 0;
     } else if (depth == 0) {
-      return grid.heuristic();
+      return grid.heuristic() - SEARCH_DEPTH;
     }
 
     if (maximizingPlayer) {

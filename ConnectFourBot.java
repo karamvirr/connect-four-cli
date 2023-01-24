@@ -79,7 +79,7 @@ public class ConnectFourBot {
         grid.undoMove(move);
         maxValue = Math.max(maxValue, value);
         alpha = Math.max(alpha, value);
-        if (beta <= alpha) {
+        if (maxValue > beta) {
           break;
         }
       }
@@ -95,7 +95,7 @@ public class ConnectFourBot {
         grid.undoMove(move);
         minValue = Math.min(minValue, value);
         beta = Math.min(beta, value);
-        if (beta <= alpha) {
+        if (minValue < alpha) {
           break;
         }
       }

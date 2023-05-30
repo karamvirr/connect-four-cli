@@ -7,6 +7,7 @@
 - Compile Java program. `javac ConnectFourClient.java`
 - Execute Java bytecode class file. `java ConnectFourClient`
 
-<img width="1032" alt="Screen Shot 2022-12-28 at 11 20 36 AM" src="https://user-images.githubusercontent.com/21179214/209866734-0731608b-6d01-4d94-9d6e-568dee517d7d.png">
-<img width="441" alt="Screen Shot 2022-12-28 at 11 53 51 AM" src="https://user-images.githubusercontent.com/21179214/209866755-ecf2069d-6f74-4f99-aef1-457d721f9282.png">
-<img width="415" alt="Screen Shot 2022-12-28 at 8 23 34 PM" src="https://user-images.githubusercontent.com/21179214/209903198-4ce0ab16-5101-463f-883a-f2bb36dfe9b0.png">
+![Screenshot 2023-05-29 at 6 52 31 PM](https://github.com/karamvirr/connect-four-cli/assets/21179214/5f8b2a25-4737-4072-813b-365124c34c0f)
+![Screenshot 2023-05-29 at 6 53 04 PM](https://github.com/karamvirr/connect-four-cli/assets/21179214/dbc5d7bb-80c8-4553-a52c-4c05b5065c62)
+
+![Screenshot 2023-05-29 at 6 51 50 PM](https://github.com/karamvirr/connect-four-cli/assets/21179214/6e611775-126e-4fa7-82df-a559e4500bbf)

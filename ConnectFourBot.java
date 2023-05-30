@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.lang.Thread;
 
 public class ConnectFourBot {
   private static final int MAX_REWARD = 1000000;
@@ -11,37 +12,51 @@ public class ConnectFourBot {
    *
    * @param grid  Connect-Four grid.
    */
-  public static void applyMove(ConnectFourGrid grid) {
+  public static void applyMove(ConnectFourGrid grid, String disc) throws InterruptedException {
     long start = System.currentTimeMillis();
-    int bestScore = -Integer.MAX_VALUE;
     ArrayList<Move> bestMoves = new ArrayList<>();
+
+    boolean isMax = disc.equals(ConnectFourGrid.COMPUTER_DISC);
+    int bestScore = isMax ? -Integer.MAX_VALUE : Integer.MAX_VALUE;
+
     for (Move move : getMoves(grid)) {
       // choose
-      grid.applyMove(move, ConnectFourGrid.COMPUTER_DISC);
+      grid.applyMove(move, disc);
       // explore
       int score = alphabeta(
-        grid, SEARCH_DEPTH, -Integer.MAX_VALUE, Integer.MAX_VALUE, false
+        grid, SEARCH_DEPTH, -Integer.MAX_VALUE, Integer.MAX_VALUE, !isMax
       );
       // unchoose
       grid.undoMove(move);
 
-      if (score > bestScore) {
-        bestScore = score;
-        bestMoves = new ArrayList<>(Arrays.asList(move));
-      } else if (score == bestScore) {
+      if (isMax) {
+        if (score > bestScore) {
+          bestScore = score;
+          bestMoves = new ArrayList<>(Arrays.asList(move));
+        }
+      } else {
+        if (score < bestScore) {
+          bestScore = score;
+          bestMoves = new ArrayList<>(Arrays.asList(move));
+        }
+      }
+      if (score == bestScore) {
         bestMoves.add(move);
       }
     }
 
     int index = new Random().nextInt(bestMoves.size());
     Move move = bestMoves.get(index);
-    grid.applyMove(move, ConnectFourGrid.COMPUTER_DISC, true);
+    grid.applyMove(move, disc, true);
 
     long finish = System.currentTimeMillis();
     float timeElapsed = (finish - start) / 1000F;
-    System.out.print("🤖 dropped a disc in column " + (move.column + 1) + " ");
+    System.out.print("🤖 dropped " + disc + " in column " + (move.column + 1) + " ");
     System.out.println("(" + timeElapsed + " seconds)");
     System.out.println();
+    if (timeElapsed < 0.1) {
+      Thread.sleep(500);
+    }
   }
 
   /**

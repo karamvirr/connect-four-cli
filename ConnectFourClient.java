@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class ConnectFourClient {
   public static ConnectFourGrid grid;
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     introduction();
 
     grid = new ConnectFourGrid();
@@ -12,38 +12,14 @@ public class ConnectFourClient {
 
     // starting player is determined by a 'coin flip'.
     if (new Random().nextBoolean()) {
-      ConnectFourBot.applyMove(grid);
+      ConnectFourBot.applyMove(grid, ConnectFourGrid.COMPUTER_DISC);
     }
 
     while (true) {
       checkGameOver();
-
-      if (inputInvalid) {
-        System.out.println("Invalid input, please try again.");
-      }
-      inputInvalid = false;
-      System.out.print("Enter a column number (1, " + ConnectFourGrid.COLUMNS
-        + ") or 'exit' to quit: ");
-      if (console.hasNextInt()) {
-        int column = console.nextInt();
-        if (column < 1 || column > ConnectFourGrid.COLUMNS) {
-          inputInvalid = true;
-        } else {
-          // 1 <= column <= ConnectFourGrid.COLUMNS
-          if (grid.applyMoveByColumn(column, ConnectFourGrid.PLAYER_DISC)) {
-            checkGameOver();
-            ConnectFourBot.applyMove(grid);
-          } else {
-            inputInvalid = true;
-          }
-        }
-      } else {
-        if (console.next().toLowerCase().equals("exit")) {
-          console.close();
-          System.exit(0);
-        }
-        inputInvalid = true;
-      }
+      ConnectFourBot.applyMove(grid, ConnectFourGrid.PLAYER_DISC);
+      checkGameOver();
+      ConnectFourBot.applyMove(grid, ConnectFourGrid.COMPUTER_DISC);
     }
   }
 
